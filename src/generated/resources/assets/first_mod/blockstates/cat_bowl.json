@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=east,states=0": {
+      "model": "first_mod:block/cat_bowl0",
+      "y": 90
+    },
+    "facing=east,states=1": {
+      "model": "first_mod:block/cat_bowl1",
+      "y": 90
+    },
+    "facing=north,states=0": {
+      "model": "first_mod:block/cat_bowl0"
+    },
+    "facing=north,states=1": {
+      "model": "first_mod:block/cat_bowl1"
+    },
+    "facing=south,states=0": {
+      "model": "first_mod:block/cat_bowl0",
+      "y": 180
+    },
+    "facing=south,states=1": {
+      "model": "first_mod:block/cat_bowl1",
+      "y": 180
+    },
+    "facing=west,states=0": {
+      "model": "first_mod:block/cat_bowl0",
+      "y": 270
+    },
+    "facing=west,states=1": {
+      "model": "first_mod:block/cat_bowl1",
+      "y": 270
+    }
+  }
+}

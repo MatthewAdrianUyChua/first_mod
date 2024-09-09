@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "first_mod:steak_and_potatoes_block"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "first_mod:blocks/steak_and_potatoes_block"
+}

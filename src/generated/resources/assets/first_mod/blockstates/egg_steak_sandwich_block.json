@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "first_mod:block/egg_steak_sandwich_block",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "first_mod:block/egg_steak_sandwich_block"
+    },
+    "facing=south": {
+      "model": "first_mod:block/egg_steak_sandwich_block",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "first_mod:block/egg_steak_sandwich_block",
+      "y": 270
+    }
+  }
+}

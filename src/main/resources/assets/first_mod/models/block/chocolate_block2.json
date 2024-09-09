@@ -1,0 +1,44 @@
+{
+	"credit": "Made with Blockbench",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "first_mod:block/chocolates/chocolate_block1_texture/chocolate_bar",
+		"particle": "first_mod:block/chocolates/chocolate_block1_texture/chocolate_bar"
+	},
+	"elements": [
+		{
+			"from": [6, 0, 8],
+			"to": [15, 2, 13],
+			"rotation": {"angle": 45, "axis": "y", "origin": [10.5, 1, 10.5]},
+			"faces": {
+				"north": {"uv": [4.5, 0, 9, 1], "texture": "#0"},
+				"east": {"uv": [4.5, 2, 7, 3], "texture": "#0"},
+				"south": {"uv": [4.5, 1, 9, 2], "texture": "#0"},
+				"west": {"uv": [4.5, 3, 7, 4], "texture": "#0"},
+				"up": {"uv": [4.5, 2.5, 0, 0], "texture": "#0"},
+				"down": {"uv": [4.5, 2.5, 0, 5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [0, 0, 6],
+			"to": [5, 2, 15],
+			"rotation": {"angle": 0, "axis": "y", "origin": [2.5, 1, 10.5]},
+			"faces": {
+				"north": {"uv": [4.5, 3, 7, 4], "texture": "#0"},
+				"east": {"uv": [4.5, 0, 9, 1], "texture": "#0"},
+				"south": {"uv": [4.5, 2, 7, 3], "texture": "#0"},
+				"west": {"uv": [4.5, 1, 9, 2], "texture": "#0"},
+				"up": {"uv": [4.5, 2.5, 0, 0], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [4.5, 2.5, 0, 5], "rotation": 270, "texture": "#0"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "group",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [0, 1]
+		}
+	]
+}

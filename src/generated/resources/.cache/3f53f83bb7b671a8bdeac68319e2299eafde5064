@@ -1,0 +1,4 @@
+// 1.20.1	2024-08-18T20:56:11.7433184	Tags for minecraft:block mod id first_mod
+cac73aafe4d35ff2e5262b60490ad81006cb4ccd data/first_mod/tags/blocks/metal_detector_valuables.json
+8ecb98c5705afc40adaade1baddc02b7e7f63857 data/minecraft/tags/blocks/mineable/pickaxe.json
+8ecb98c5705afc40adaade1baddc02b7e7f63857 data/minecraft/tags/blocks/needs_iron_tool.json

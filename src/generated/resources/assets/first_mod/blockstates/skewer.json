@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "first_mod:block/skewer",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "first_mod:block/skewer"
+    },
+    "facing=south": {
+      "model": "first_mod:block/skewer",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "first_mod:block/skewer",
+      "y": 270
+    }
+  }
+}

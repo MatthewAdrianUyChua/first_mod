@@ -1,0 +1,244 @@
+{
+  "variants": {
+    "candles=1,facing=east,lit=false,waterlogged=false": {
+      "model": "first_mod:block/salt_pack_block1",
+      "y": 90
+    },
+    "candles=1,facing=east,lit=false,waterlogged=true": {
+      "model": "first_mod:block/salt_pack_block1",
+      "y": 90
+    },
+    "candles=1,facing=east,lit=true,waterlogged=false": {
+      "model": "first_mod:block/salt_pack_block1",
+      "y": 90
+    },
+    "candles=1,facing=east,lit=true,waterlogged=true": {
+      "model": "first_mod:block/salt_pack_block1",
+      "y": 90
+    },
+    "candles=1,facing=north,lit=false,waterlogged=false": {
+      "model": "first_mod:block/salt_pack_block1"
+    },
+    "candles=1,facing=north,lit=false,waterlogged=true": {
+      "model": "first_mod:block/salt_pack_block1"
+    },
+    "candles=1,facing=north,lit=true,waterlogged=false": {
+      "model": "first_mod:block/salt_pack_block1"
+    },
+    "candles=1,facing=north,lit=true,waterlogged=true": {
+      "model": "first_mod:block/salt_pack_block1"
+    },
+    "candles=1,facing=south,lit=false,waterlogged=false": {
+      "model": "first_mod:block/salt_pack_block1",
+      "y": 180
+    },
+    "candles=1,facing=south,lit=false,waterlogged=true": {
+      "model": "first_mod:block/salt_pack_block1",
+      "y": 180
+    },
+    "candles=1,facing=south,lit=true,waterlogged=false": {
+      "model": "first_mod:block/salt_pack_block1",
+      "y": 180
+    },
+    "candles=1,facing=south,lit=true,waterlogged=true": {
+      "model": "first_mod:block/salt_pack_block1",
+      "y": 180
+    },
+    "candles=1,facing=west,lit=false,waterlogged=false": {
+      "model": "first_mod:block/salt_pack_block1",
+      "y": 270
+    },
+    "candles=1,facing=west,lit=false,waterlogged=true": {
+      "model": "first_mod:block/salt_pack_block1",
+      "y": 270
+    },
+    "candles=1,facing=west,lit=true,waterlogged=false": {
+      "model": "first_mod:block/salt_pack_block1",
+      "y": 270
+    },
+    "candles=1,facing=west,lit=true,waterlogged=true": {
+      "model": "first_mod:block/salt_pack_block1",
+      "y": 270
+    },
+    "candles=2,facing=east,lit=false,waterlogged=false": {
+      "model": "first_mod:block/salt_pack_block2",
+      "y": 90
+    },
+    "candles=2,facing=east,lit=false,waterlogged=true": {
+      "model": "first_mod:block/salt_pack_block2",
+      "y": 90
+    },
+    "candles=2,facing=east,lit=true,waterlogged=false": {
+      "model": "first_mod:block/salt_pack_block2",
+      "y": 90
+    },
+    "candles=2,facing=east,lit=true,waterlogged=true": {
+      "model": "first_mod:block/salt_pack_block2",
+      "y": 90
+    },
+    "candles=2,facing=north,lit=false,waterlogged=false": {
+      "model": "first_mod:block/salt_pack_block2"
+    },
+    "candles=2,facing=north,lit=false,waterlogged=true": {
+      "model": "first_mod:block/salt_pack_block2"
+    },
+    "candles=2,facing=north,lit=true,waterlogged=false": {
+      "model": "first_mod:block/salt_pack_block2"
+    },
+    "candles=2,facing=north,lit=true,waterlogged=true": {
+      "model": "first_mod:block/salt_pack_block2"
+    },
+    "candles=2,facing=south,lit=false,waterlogged=false": {
+      "model": "first_mod:block/salt_pack_block2",
+      "y": 180
+    },
+    "candles=2,facing=south,lit=false,waterlogged=true": {
+      "model": "first_mod:block/salt_pack_block2",
+      "y": 180
+    },
+    "candles=2,facing=south,lit=true,waterlogged=false": {
+      "model": "first_mod:block/salt_pack_block2",
+      "y": 180
+    },
+    "candles=2,facing=south,lit=true,waterlogged=true": {
+      "model": "first_mod:block/salt_pack_block2",
+      "y": 180
+    },
+    "candles=2,facing=west,lit=false,waterlogged=false": {
+      "model": "first_mod:block/salt_pack_block2",
+      "y": 270
+    },
+    "candles=2,facing=west,lit=false,waterlogged=true": {
+      "model": "first_mod:block/salt_pack_block2",
+      "y": 270
+    },
+    "candles=2,facing=west,lit=true,waterlogged=false": {
+      "model": "first_mod:block/salt_pack_block2",
+      "y": 270
+    },
+    "candles=2,facing=west,lit=true,waterlogged=true": {
+      "model": "first_mod:block/salt_pack_block2",
+      "y": 270
+    },
+    "candles=3,facing=east,lit=false,waterlogged=false": {
+      "model": "first_mod:block/salt_pack_block3",
+      "y": 90
+    },
+    "candles=3,facing=east,lit=false,waterlogged=true": {
+      "model": "first_mod:block/salt_pack_block3",
+      "y": 90
+    },
+    "candles=3,facing=east,lit=true,waterlogged=false": {
+      "model": "first_mod:block/salt_pack_block3",
+      "y": 90
+    },
+    "candles=3,facing=east,lit=true,waterlogged=true": {
+      "model": "first_mod:block/salt_pack_block3",
+      "y": 90
+    },
+    "candles=3,facing=north,lit=false,waterlogged=false": {
+      "model": "first_mod:block/salt_pack_block3"
+    },
+    "candles=3,facing=north,lit=false,waterlogged=true": {
+      "model": "first_mod:block/salt_pack_block3"
+    },
+    "candles=3,facing=north,lit=true,waterlogged=false": {
+      "model": "first_mod:block/salt_pack_block3"
+    },
+    "candles=3,facing=north,lit=true,waterlogged=true": {
+      "model": "first_mod:block/salt_pack_block3"
+    },
+    "candles=3,facing=south,lit=false,waterlogged=false": {
+      "model": "first_mod:block/salt_pack_block3",
+      "y": 180
+    },
+    "candles=3,facing=south,lit=false,waterlogged=true": {
+      "model": "first_mod:block/salt_pack_block3",
+      "y": 180
+    },
+    "candles=3,facing=south,lit=true,waterlogged=false": {
+      "model": "first_mod:block/salt_pack_block3",
+      "y": 180
+    },
+    "candles=3,facing=south,lit=true,waterlogged=true": {
+      "model": "first_mod:block/salt_pack_block3",
+      "y": 180
+    },
+    "candles=3,facing=west,lit=false,waterlogged=false": {
+      "model": "first_mod:block/salt_pack_block3",
+      "y": 270
+    },
+    "candles=3,facing=west,lit=false,waterlogged=true": {
+      "model": "first_mod:block/salt_pack_block3",
+      "y": 270
+    },
+    "candles=3,facing=west,lit=true,waterlogged=false": {
+      "model": "first_mod:block/salt_pack_block3",
+      "y": 270
+    },
+    "candles=3,facing=west,lit=true,waterlogged=true": {
+      "model": "first_mod:block/salt_pack_block3",
+      "y": 270
+    },
+    "candles=4,facing=east,lit=false,waterlogged=false": {
+      "model": "first_mod:block/salt_pack_block4",
+      "y": 90
+    },
+    "candles=4,facing=east,lit=false,waterlogged=true": {
+      "model": "first_mod:block/salt_pack_block4",
+      "y": 90
+    },
+    "candles=4,facing=east,lit=true,waterlogged=false": {
+      "model": "first_mod:block/salt_pack_block4",
+      "y": 90
+    },
+    "candles=4,facing=east,lit=true,waterlogged=true": {
+      "model": "first_mod:block/salt_pack_block4",
+      "y": 90
+    },
+    "candles=4,facing=north,lit=false,waterlogged=false": {
+      "model": "first_mod:block/salt_pack_block4"
+    },
+    "candles=4,facing=north,lit=false,waterlogged=true": {
+      "model": "first_mod:block/salt_pack_block4"
+    },
+    "candles=4,facing=north,lit=true,waterlogged=false": {
+      "model": "first_mod:block/salt_pack_block4"
+    },
+    "candles=4,facing=north,lit=true,waterlogged=true": {
+      "model": "first_mod:block/salt_pack_block4"
+    },
+    "candles=4,facing=south,lit=false,waterlogged=false": {
+      "model": "first_mod:block/salt_pack_block4",
+      "y": 180
+    },
+    "candles=4,facing=south,lit=false,waterlogged=true": {
+      "model": "first_mod:block/salt_pack_block4",
+      "y": 180
+    },
+    "candles=4,facing=south,lit=true,waterlogged=false": {
+      "model": "first_mod:block/salt_pack_block4",
+      "y": 180
+    },
+    "candles=4,facing=south,lit=true,waterlogged=true": {
+      "model": "first_mod:block/salt_pack_block4",
+      "y": 180
+    },
+    "candles=4,facing=west,lit=false,waterlogged=false": {
+      "model": "first_mod:block/salt_pack_block4",
+      "y": 270
+    },
+    "candles=4,facing=west,lit=false,waterlogged=true": {
+      "model": "first_mod:block/salt_pack_block4",
+      "y": 270
+    },
+    "candles=4,facing=west,lit=true,waterlogged=false": {
+      "model": "first_mod:block/salt_pack_block4",
+      "y": 270
+    },
+    "candles=4,facing=west,lit=true,waterlogged=true": {
+      "model": "first_mod:block/salt_pack_block4",
+      "y": 270
+    }
+  }
+}
