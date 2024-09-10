@@ -11,12 +11,10 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.AgeableMob;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.TamableAnimal;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.behavior.PositionTracker;
@@ -33,12 +31,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraftforge.common.Tags;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.*;
+import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.object.PlayState;
 
 import java.lang.reflect.Field;
@@ -57,6 +57,10 @@ public class CatEntity extends TamableAnimal implements GeoEntity {
     public static BlockPos targetPosSharpen;
 
     public static BlockPos targetPos;
+
+    public static Block blockTargetFood;
+
+    public static BlockPos targetPosFood;
 
     private static long lastMovedTime = System.currentTimeMillis();
 
@@ -93,9 +97,10 @@ public class CatEntity extends TamableAnimal implements GeoEntity {
     protected void registerGoals() {
 
         this.goalSelector.addGoal(1, new FloatGoal(this));
-        this.goalSelector.addGoal(2, new WalkToBlockGoal(this, 0.8F, ModBlocks.CAT_BOWL.get(), this));
+        this.goalSelector.addGoal(2, new WalkToFoodGoal(this, 0.8F, ModBlocks.CAT_BOWL.get(), this));
         this.goalSelector.addGoal(3, new SitWhenOrderedToGoal(this));
-        this.goalSelector.addGoal(5, new CustomFollowOwnerGoal(this, 0.5F, 10.0F, 5.0F, false, this));
+        this.goalSelector.addGoal(4, new CustomFollowOwnerGoal(this, 0.5F, 10.0F, 5.0F, false, this));
+        this.goalSelector.addGoal(5, new WalkToBlockGoal(this, 0.5F, Blocks.RED_BED, this));
         this.goalSelector.addGoal(6, new WalkToBlockSharpenGoal(this, 0.5F, Blocks.OAK_LOG, this));
         this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 0.5f));
         this.goalSelector.addGoal(8, new CustomRandomLookAroundGoal(this, this));
@@ -137,9 +142,9 @@ public class CatEntity extends TamableAnimal implements GeoEntity {
             if (!tAnimationState.isMoving()) {
                 //System.out.println(isSitting);
 
-                if(System.currentTimeMillis() - lastMovedTime >= 2500 && isSitting == false){
+                if((System.currentTimeMillis() - lastMovedTime >= 2500 && isSitting == false)){
                     //System.out.println("PLAY LAYING DOWN");
-                    tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.cat.layingDown", Animation.LoopType.PLAY_ONCE));
+                    tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.cat.layingDown", Animation.LoopType.PLAY_ONCE).then("animation.cat.layingDownLoop", Animation.LoopType.LOOP));
                     return PlayState.CONTINUE;
                 }else if(isSitting == true){
                     if(this.isSleeping == true){
@@ -173,21 +178,21 @@ public class CatEntity extends TamableAnimal implements GeoEntity {
                     }
                 }
 
-                if(targetPos != null && blockTarget != null) {
-                    if (this.blockPosition().closerThan(targetPos, 1.5) && (blockTarget.equals(ModBlocks.CAT_BOWL.get()) == true) && (this.level().getBlockState(targetPos).getValue(ModBlockStateProvider.STATES_TWO) == 1)) {
+                if(targetPosFood != null && blockTargetFood != null) {
+                    if (this.blockPosition().closerThan(targetPosFood, 1.5) && (blockTargetFood.equals(ModBlocks.CAT_BOWL.get()) == true) && (this.level().getBlockState(targetPosFood).getValue(ModBlockStateProvider.STATES_TWO) == 1)) {
 
                         //System.out.println("FOOD");
 
 
                         lastMovedTime = System.currentTimeMillis();  // Reset the timer when the entity moves
 
-                        this.getLookControl().setLookAt(targetPos.getX(), targetPos.getY() + 1.0, targetPos.getZ());
+                        this.getLookControl().setLookAt(targetPosFood.getX(), targetPosFood.getY() + 1.0, targetPosFood.getZ());
 
                         tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.cat.eat", Animation.LoopType.PLAY_ONCE));
 
                         if (tAnimationState.getController().hasAnimationFinished()) {
-                            targetPos = null;
-                            blockTarget = null;
+                            targetPosFood = null;
+                            blockTargetFood = null;
                             finishedEating = true;
                         }
                         return PlayState.CONTINUE;
@@ -226,8 +231,8 @@ public class CatEntity extends TamableAnimal implements GeoEntity {
             this.tickLeash();
             if (this.tickCount % 5 == 0) {
                 this.updateControlFlags();
-                if(finishedEating == true && (targetPos != null && blockTarget != null)){
-                    this.level().setBlock(targetPos, this.level().getBlockState(targetPos).setValue(ModBlockStateProvider.STATES_TWO, 0), 3);
+                if(finishedEating == true && (targetPosFood != null && blockTargetFood != null)){
+                    this.level().setBlock(targetPosFood, this.level().getBlockState(targetPosFood).setValue(ModBlockStateProvider.STATES_TWO, 0), 3);
                     finishedEating = false;
                 }
 
@@ -236,6 +241,16 @@ public class CatEntity extends TamableAnimal implements GeoEntity {
                 }else{
                     if(System.currentTimeMillis() - sittingTime >= 17250){
                         this.setNoAi(true);
+                    }
+                }
+
+                System.out.println(targetPos);
+                if(targetPos != null) {
+                    if (this.blockPosition().closerThan(targetPos,  1.0)) {
+                        targetPos = null;
+                        this.interactSetting = 1;
+                        isSitting = true;
+                        this.setOrderedToSit(true);
                     }
                 }
             }
@@ -247,6 +262,15 @@ public class CatEntity extends TamableAnimal implements GeoEntity {
                 if(System.currentTimeMillis() - sittingTime >= 17250){
                     //System.out.println("SLEEP");
                     this.isSleeping = true;
+                }
+            }
+
+            if(targetPos != null) {
+                if (this.blockPosition().closerThan(targetPos,  1.0)) {
+                    targetPos = null;
+                    this.interactSetting = 1;
+                    isSitting = true;
+                    this.setOrderedToSit(true);
                 }
             }
         }
@@ -285,6 +309,7 @@ public class CatEntity extends TamableAnimal implements GeoEntity {
                             isSitting = false;
                             following = true;
                             interactSetting++;
+                            this.setOrderedToSit(false);
                             break;
                         case 2: //makes the entity sit
                             System.out.println("CASE 2" + interactSetting);
@@ -371,7 +396,7 @@ public class CatEntity extends TamableAnimal implements GeoEntity {
         this.interactSetting = i - 1;
     }
 
-    public class WalkToBlockGoal extends Goal {
+    public class WalkToFoodGoal extends Goal {
         private final Mob mob;
         private final double speed;
 
@@ -379,7 +404,7 @@ public class CatEntity extends TamableAnimal implements GeoEntity {
 
         private final CatEntity cat;
 
-        public WalkToBlockGoal(Mob mob, double speed, Block block, CatEntity cat) {
+        public WalkToFoodGoal(Mob mob, double speed, Block block, CatEntity cat) {
             this.mob = mob;
             this.speed = speed;
             this.block = block;
@@ -389,9 +414,9 @@ public class CatEntity extends TamableAnimal implements GeoEntity {
 
         @Override
         public boolean canUse() {
-            targetPos = findNearestOakLog();
+            targetPosFood = findNearestOakLog();
 
-            if (targetPos != null && (mob.level().getBlockState(targetPos).getValue(ModBlockStateProvider.STATES_TWO) == 1)) {
+            if (targetPosFood != null && (mob.level().getBlockState(targetPosFood).getValue(ModBlockStateProvider.STATES_TWO) == 1)) {
                 cat.focus = true;
                 return true;
             }
@@ -401,27 +426,27 @@ public class CatEntity extends TamableAnimal implements GeoEntity {
 
         @Override
         public void start() {
-            if (targetPos != null) {
-                BlockPos adjacentPos = findAdjacentAirBlock(targetPos);
+            if (targetPosFood != null) {
+                BlockPos adjacentPos = findAdjacentAirBlock(targetPosFood);
                 if (adjacentPos != null) {
 
-                    blockTarget = block;
+                    blockTargetFood = block;
                     // Move to the adjacent block
                     mob.getNavigation().moveTo(adjacentPos.getX(), adjacentPos.getY(), adjacentPos.getZ(), speed);
 
                     // Make the mob face the oak log when it arrives
-                    mob.getLookControl().setLookAt(targetPos.getX(), targetPos.getY() + 1.0, targetPos.getZ());
+                    mob.getLookControl().setLookAt(targetPosFood.getX(), targetPosFood.getY() + 1.0, targetPosFood.getZ());
 
                 } else {
                     // Fallback to moving to the log's position
-                    mob.getNavigation().moveTo(targetPos.getX(), targetPos.getY(), targetPos.getZ(), speed);
+                    mob.getNavigation().moveTo(targetPosFood.getX(), targetPosFood.getY(), targetPosFood.getZ(), speed);
                 }
             }
         }
 
         @Override
         public boolean canContinueToUse() {
-            return !mob.getNavigation().isDone() && targetPos != null && isOakLog(targetPos) && (mob.level().getBlockState(targetPos).getValue(ModBlockStateProvider.STATES_TWO) == 1);
+            return !mob.getNavigation().isDone() && targetPosFood != null && isOakLog(targetPosFood) && (mob.level().getBlockState(targetPosFood).getValue(ModBlockStateProvider.STATES_TWO) == 1);
         }
 
         private BlockPos findNearestOakLog() {
@@ -509,12 +534,11 @@ public class CatEntity extends TamableAnimal implements GeoEntity {
         @Override
         public void start() {
             if (targetPosSharpen != null) {
-                BlockPos adjacentPos = findAdjacentAirBlock(targetPosSharpen);
-                if (adjacentPos != null) {
+                if (targetPosSharpen != null) {
 
                     blockTargetSharpen = block;
                     // Move to the adjacent block
-                    mob.getNavigation().moveTo(adjacentPos.getX(), adjacentPos.getY(), adjacentPos.getZ(), speed);
+                    mob.getNavigation().moveTo(targetPosSharpen.getX(), targetPosSharpen.getY(), targetPosSharpen.getZ(), speed);
 
                     // Make the mob face the oak log when it arrives
                     mob.getLookControl().setLookAt(targetPosSharpen.getX(), targetPosSharpen.getY() + 1.0, targetPosSharpen.getZ());
@@ -564,20 +588,112 @@ public class CatEntity extends TamableAnimal implements GeoEntity {
             return mob.level().getBlockState(pos).getBlock() == block;
         }
 
-        private BlockPos findAdjacentAirBlock(BlockPos logPos) {
-            // List of adjacent offsets (4 horizontal directions)
-            BlockPos[] adjacentOffsets = {
-                    logPos.north(), logPos.south(), logPos.east(), logPos.west()
-            };
+    }
 
-            for (BlockPos adjacentPos : adjacentOffsets) {
-                if (mob.level().isEmptyBlock(adjacentPos)) {
-                    return adjacentPos;
+    public class WalkToBlockGoal extends Goal {
+        private final Mob mob;
+        private final double speed;
+
+        private final Block block;
+
+        private final CatEntity cat;
+
+        private int tickCounter;  // Tracks ticks for next start
+
+        private static final int TICK_THRESHOLD = 80;  // Delay between each goal usage
+
+        public WalkToBlockGoal(Mob mob, double speed, Block block, CatEntity cat) {
+            this.mob = mob;
+            this.speed = speed;
+            this.block = block;
+            this.setFlags(EnumSet.of(Flag.MOVE));
+            this.cat = cat;
+            this.tickCounter = 0;  // Initialize the tick counter
+        }
+
+        @Override
+        public boolean canUse() {
+
+            // Increment tick counter and only perform action every TICK_THRESHOLD ticks
+            if (tickCounter++ < TICK_THRESHOLD) {
+                return false;  // Skip the check if we're not at the tick threshold
+            }
+            // Reset the counter once we reach the threshold
+            tickCounter = 0;
+
+            try{
+                if(!(mob.blockPosition().closerThan(findNearestOakLog(),  1.0))){
+                    targetPos= findNearestOakLog();
+
+                    if(targetPos != null){
+                        return true;
+                    }
+                }
+                return false;
+            }catch(NullPointerException e){
+                return false;
+            }
+        }
+
+        @Override
+        public void start() {
+            if (targetPos != null) {
+                if (targetPos != null) {
+
+                    blockTarget = block;
+                    // Move to the adjacent block
+                    mob.getNavigation().moveTo(targetPos.getX(), targetPos.getY(), targetPos.getZ(), speed);
+
+                    // Make the mob face the oak log when it arrives
+                    mob.getLookControl().setLookAt(targetPos.getX(), targetPos.getY() + 1.0, targetPos.getZ());
+
+                } else {
+                    // Fallback to moving to the log's position
+                    mob.getNavigation().moveTo(targetPos.getX(), targetPos.getY(), targetPos.getZ(), speed);
                 }
             }
+        }
 
-            // No adjacent air block found
+        @Override
+        public boolean canContinueToUse() {
+            return !mob.getNavigation().isDone() && targetPos != null && isOakLog(targetPos) && !(mob.blockPosition().closerThan(findNearestOakLog(),  1.0));
+        }
+
+        protected int nextStartTick(PathfinderMob pCreature) {
+            return 40;
+        }
+
+        private BlockPos findNearestOakLog() {
+            Level world = mob.level();
+            BlockPos mobPos = mob.blockPosition();
+            int radius = 8;  // Horizontal search radius
+
+            // Define vertical search limits
+            int minY = mobPos.getY() - 0;  // 4 blocks below the mob
+            int maxY = mobPos.getY() + 0;  // 4 blocks above the mob
+
+            // Ensure minY and maxY are within world height limits
+            minY = Math.max(world.getMinBuildHeight(), minY);
+            maxY = Math.min(world.getMaxBuildHeight(), maxY);
+
+            // Iterate over the specified range
+            for (int x = mobPos.getX() - radius; x <= mobPos.getX() + radius; x++) {
+                for (int y = minY; y <= maxY; y++) {
+                    for (int z = mobPos.getZ() - radius; z <= mobPos.getZ() + radius; z++) {
+                        BlockPos pos = new BlockPos(x, y, z);
+                        if (isOakLog(pos)) {
+                            //System.out.println("Found Oak Log at: " + pos);
+                            return pos;
+                        }
+                    }
+                }
+            }
             return null;
+        }
+
+        private boolean isOakLog(BlockPos pos) {
+            //System.out.println("Block at " + pos + ": " + mob.level().getBlockState(pos).getBlock());
+            return mob.level().getBlockState(pos).getBlock() == block;
         }
 
     }
