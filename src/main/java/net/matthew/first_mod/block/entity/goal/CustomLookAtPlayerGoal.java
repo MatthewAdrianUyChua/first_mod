@@ -18,13 +18,8 @@ public class CustomLookAtPlayerGoal extends LookAtPlayerGoal {
     @Override
     public boolean canUse() {
 
-        if(!mob.level().isClientSide){
-            System.out.println("SERVER: "+this.cat.focus);
-        }else{
-            System.out.println("CLIENT: "+this.cat.focus);
-        }
-
-        if (this.mob.getRandom().nextFloat() >= this.probability || this.cat.focus == true) {
+        if (this.mob.getRandom().nextFloat() >= this.probability || this.cat.focus() == true) {
+            //System.out.println("FOCUSING");
             return false;
         } else {
             if (this.mob.getTarget() != null) {

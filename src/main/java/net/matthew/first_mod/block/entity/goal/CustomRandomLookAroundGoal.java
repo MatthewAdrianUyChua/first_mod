@@ -24,10 +24,9 @@ public class CustomRandomLookAroundGoal extends RandomLookAroundGoal {
 
     @Override
     public boolean canUse() {
-        if(this.cat.focus == false){
+        if(this.cat.focus() == false){
             return this.mob.getRandom().nextFloat() < 0.02F;
         }else{
-            System.out.println("STOP LOOKING AROUND");
             return false;
         }
     }

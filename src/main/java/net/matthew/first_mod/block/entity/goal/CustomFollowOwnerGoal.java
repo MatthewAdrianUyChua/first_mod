@@ -60,7 +60,7 @@ public class CustomFollowOwnerGoal extends Goal {
         if (livingentity == null) {
             //System.out.println("OWNER NULL");
             return false;
-        }else if(this.catEntity.following == false){
+        }else if(this.catEntity.following() == false){
             //System.out.println("FOLLOWING IS" + following);
             return false;
         }else if (livingentity.isSpectator()) {

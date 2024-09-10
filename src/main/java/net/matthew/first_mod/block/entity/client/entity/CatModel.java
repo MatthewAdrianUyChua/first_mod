@@ -40,7 +40,7 @@ public class CatModel extends GeoModel<CatEntity> {
         //System.out.println((Objects.equals(animationState.getController().getCurrentAnimation().animation().name(), "animation.cat.layingDown")));
 
         if(head != null && (!(Objects.equals(animationState.getController().getCurrentAnimation().animation().name(), "animation.cat.layingDown")) && !(Objects.equals(animationState.getController().getCurrentAnimation().animation().name(), "animation.cat.eat"))
-        && !(Objects.equals(animationState.getController().getCurrentAnimation().animation().name(), "animation.cat.sharpen")) && (animatable.isSleeping == false))){
+        && !(Objects.equals(animationState.getController().getCurrentAnimation().animation().name(), "animation.cat.sharpen")) && (animatable.isSleeping() == false))){
             EntityModelData entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA);
 
             head.setRotX(entityData.headPitch() * Mth.DEG_TO_RAD);
