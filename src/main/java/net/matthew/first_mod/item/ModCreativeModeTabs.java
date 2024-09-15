@@ -91,6 +91,13 @@ public class ModCreativeModeTabs {
                         pOutput.accept(ModItems.DOUGH.get());
                         pOutput.accept(ModItems.KNEADED_DOUGH.get());
                         pOutput.accept(ModBlocks.CRISPY_PORK_BELLY_BLOCK.get());
+                        pOutput.accept(ModBlocks.LAMBCHOP_BLOCK.get());
+                        pOutput.accept(ModBlocks.FRUIT_COCKTAIL_BLOCK.get());
+                        pOutput.accept(ModBlocks.BACON_EGGS_BLOCK.get());
+                        pOutput.accept(ModBlocks.SALISBURY_STEAK_BLOCK.get());
+                        pOutput.accept(ModBlocks.GRILLED_SALMON_BLOCK.get());
+                        pOutput.accept(ModBlocks.HONEY_GLAZED_CHICKEN_BLOCK.get());
+                        pOutput.accept(ModBlocks.PORKCHOP_BLOCK.get());
                     })).build());
 
     public static void register(IEventBus eventBus){

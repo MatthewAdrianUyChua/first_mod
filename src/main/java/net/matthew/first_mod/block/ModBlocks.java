@@ -214,6 +214,27 @@ public class ModBlocks {
     public static final RegistryObject<Block> CRISPY_PORK_BELLY_BLOCK = registerBlock("crispy_pork_belly_block",
             () -> new Four_Cake_Like_Rotatable_Block(BlockBehaviour.Properties.copy(Blocks.GLASS).sound(SoundType.WOOD).noOcclusion()));
 
+    public static final RegistryObject<Block> LAMBCHOP_BLOCK = registerBlock("lambchop_block",
+            () -> new Four_Cake_Like_Rotatable_Block(BlockBehaviour.Properties.copy(Blocks.GLASS).sound(SoundType.WOOD).noOcclusion()));
+
+    public static final RegistryObject<Block> FRUIT_COCKTAIL_BLOCK = registerBlock("fruit_cocktail_block",
+            () -> new Four_Cake_Like_Rotatable_Block(BlockBehaviour.Properties.copy(Blocks.GLASS).sound(SoundType.WOOD).noOcclusion()));
+
+    public static final RegistryObject<Block> BACON_EGGS_BLOCK = registerBlock("bacon_eggs_block",
+            () -> new Four_Cake_Like_Rotatable_Block(BlockBehaviour.Properties.copy(Blocks.GLASS).sound(SoundType.WOOD).noOcclusion()));
+
+    public static final RegistryObject<Block> SALISBURY_STEAK_BLOCK = registerBlock("salisbury_steak_block",
+            () -> new Five_Cake_Like_Rotatable_Block(BlockBehaviour.Properties.copy(Blocks.GLASS).sound(SoundType.WOOD).noOcclusion()));
+
+    public static final RegistryObject<Block> GRILLED_SALMON_BLOCK = registerBlock("grilled_salmon_block",
+            () -> new Three_Cake_Like_Rotatable_Block(BlockBehaviour.Properties.copy(Blocks.GLASS).sound(SoundType.WOOD).noOcclusion()));
+
+    public static final RegistryObject<Block> HONEY_GLAZED_CHICKEN_BLOCK = registerBlock("honey_glazed_chicken_block",
+            () -> new Six_Cake_Like_Rotatable_Block(BlockBehaviour.Properties.copy(Blocks.GLASS).sound(SoundType.WOOD).noOcclusion()));
+
+    public static final RegistryObject<Block> PORKCHOP_BLOCK = registerBlock("porkchop_block",
+            () -> new Three_Cake_Like_Rotatable_Block(BlockBehaviour.Properties.copy(Blocks.GLASS).sound(SoundType.WOOD).noOcclusion()));
+
     public static final RegistryObject<Block> SAPPHIRE_ORE = registerBlock("sapphire_ore",
             () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.STONE)
                     .strength(2f).requiresCorrectToolForDrops(), UniformInt.of(3,6))); //this means you will get 3-6 exp per mine of ore

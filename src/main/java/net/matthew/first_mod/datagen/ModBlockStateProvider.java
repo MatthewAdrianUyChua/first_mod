@@ -23,6 +23,8 @@ import java.nio.file.Path;
 
 public class ModBlockStateProvider extends BlockStateProvider {
 
+    public static final IntegerProperty BITES_THREE = IntegerProperty.create("bites", 0, 2);
+
     public static final IntegerProperty BITES_FOUR = IntegerProperty.create("bites", 0, 3);
     public static final IntegerProperty BITES_SIX = IntegerProperty.create("bites", 0, 5);
 
@@ -103,6 +105,13 @@ public class ModBlockStateProvider extends BlockStateProvider {
         directionalBlockWithItem(ModBlocks.EGG_SANDWICH_BLOCK, ResourceLocation.tryParse("first_mod:block/egg_sandwich_block"));
         catBowlBlock(ModBlocks.CAT_BOWL, ResourceLocation.tryParse("first_mod:block/cat_bowl"));
         directionalBlockWithFourBites(ModBlocks.CRISPY_PORK_BELLY_BLOCK, ResourceLocation.tryParse("first_mod:block/crispy_pork_belly_block"));
+        directionalBlockWithFourBites(ModBlocks.LAMBCHOP_BLOCK, ResourceLocation.tryParse("first_mod:block/lambchop_block"));
+        directionalBlockWithFourBites(ModBlocks.FRUIT_COCKTAIL_BLOCK, ResourceLocation.tryParse("first_mod:block/fruit_cocktail_block"));
+        directionalBlockWithFourBites(ModBlocks.BACON_EGGS_BLOCK, ResourceLocation.tryParse("first_mod:block/bacon_eggs_block"));
+        directionalBlockWithFiveBites(ModBlocks.SALISBURY_STEAK_BLOCK, ResourceLocation.tryParse("first_mod:block/salisbury_steak_block"));
+        directionalBlockWithThreeBites(ModBlocks.GRILLED_SALMON_BLOCK, ResourceLocation.tryParse("first_mod:block/grilled_salmon_block"));
+        directionalBlockWithSixBites(ModBlocks.HONEY_GLAZED_CHICKEN_BLOCK, ResourceLocation.tryParse("first_mod:block/honey_glazed_chicken_block"));
+        directionalBlockWithThreeBites(ModBlocks.PORKCHOP_BLOCK, ResourceLocation.tryParse("first_mod:block/porkchop_block"));
         //blockWithItem(ModBlocks.CUTTING_BOARD_BLOCK);
     }
 
@@ -189,6 +198,28 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
             ModItemModelProvider.writeJsonFile("..\\src\\main\\resources\\assets\\first_mod\\models\\item\\" + blockRegistryObject.getId().getPath() + ".json" , "first_mod:block/" + blockRegistryObject.getId().getPath() + "0");
             //simpleBlockItem(blockRegistryObject.get(), itemModels().getExistingFile(path));
+
+    }
+
+    private void directionalBlockWithThreeBites(RegistryObject<Block> blockRegistryObject, ResourceLocation pathBase) {
+        getVariantBuilder(blockRegistryObject.get()).forAllStates(state -> {
+            Direction direction = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+            int yRotation = (int) direction.getOpposite().toYRot();
+            int bites = state.getValue(BITES_THREE);
+
+            // Build the path to the model file based on the number of bites
+            ResourceLocation path = new ResourceLocation(pathBase.getNamespace(), pathBase.getPath() + bites);
+
+            return ConfiguredModel.builder()
+                    .modelFile(itemModels().getExistingFile(path))
+                    .rotationY(yRotation)
+                    .build();
+        });
+
+        // Generate item model for each bites state
+
+        ModItemModelProvider.writeJsonFile("..\\src\\main\\resources\\assets\\first_mod\\models\\item\\" + blockRegistryObject.getId().getPath() + ".json" , "first_mod:block/" + blockRegistryObject.getId().getPath() + "0");
+        //simpleBlockItem(blockRegistryObject.get(), itemModels().getExistingFile(path));
 
     }
 

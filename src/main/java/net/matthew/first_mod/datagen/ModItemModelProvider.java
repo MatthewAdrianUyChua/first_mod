@@ -40,6 +40,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         writeJsonFileItem("..\\src\\main\\resources\\assets\\first_mod\\models\\item\\" + ModItems.SKEWER_ITEM.getId().getPath() + ".json", "first_mod:block/" + ModBlocks.SKEWER.getId().getPath());
         writeJsonFileItem("..\\src\\main\\resources\\assets\\first_mod\\models\\item\\" + ModItems.EGG_STEAK_SANDWICH.getId().getPath() + ".json", "first_mod:block/" + ModBlocks.EGG_STEAK_SANDWICH_BLOCK.getId().getPath());
         writeJsonFileItem("..\\src\\main\\resources\\assets\\first_mod\\models\\item\\" + ModItems.EGG_SANDWICH.getId().getPath() + ".json", "first_mod:block/" + ModBlocks.EGG_SANDWICH_BLOCK.getId().getPath());
+        
 
         withExistingParent(ModItems.CAT_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
     }

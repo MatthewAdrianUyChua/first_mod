@@ -38,7 +38,6 @@ public class ModItems {
 
     public static final RegistryObject<Item> EGG_SANDWICH = ITEMS.register("egg_sandwich",
             () -> new Rotatable_Block_Eatable(ModBlocks.EGG_SANDWICH_BLOCK.get(), new Item.Properties().food(ModFoods.EGG_SANDWICH)));
-
     public static final RegistryObject<Item> CHEF_HAT = ITEMS.register("chef_armor",
             () -> new ChefArmorItem(ModArmorMaterials.CHEF, ArmorItem.Type.HELMET, new Item.Properties()));
 

@@ -73,6 +73,13 @@
   "item.first_mod.dough": "Dough",
   "item.first_mod.kneaded_dough": "Kneaded Dough",
   "block.first_mod.crispy_pork_belly_block": "Crispy Pork Belly Block",
+  "block.first_mod.lambchop_block": "Lambchop Block",
+  "block.first_mod.fruit_cocktail_block": "Fruit Cocktail Block",
+  "block.first_mod.bacon_eggs_block": "Bacon and Eggs Block",
+  "block.first_mod.salisbury_steak_block": "Salisbury Steak Block",
+  "block.first_mod.grilled_salmon_block": "Grilled Salmon Block",
+  "block.first_mod.honey_glazed_chicken_block": "Honey Glazed Chicken Block",
+  "block.first_mod.porkchop_block": "Porkchop Block",
 
   "creative.mod_tab": "Mod Tab"
 }
