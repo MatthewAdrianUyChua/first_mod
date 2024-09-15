@@ -46,6 +46,13 @@ public class ModItems {
             () -> new ForgeSpawnEggItem(ModEntities.CAT, 0xD57E36, 0x1D0D00,
                     new Item.Properties()));
 
+
+    public static final RegistryObject<Item> DOUGH = ITEMS.register("dough",
+            () -> new Item(new Item.Properties()));
+
+    public static final RegistryObject<Item> KNEADED_DOUGH = ITEMS.register("kneaded_dough",
+            () -> new Item(new Item.Properties()));
+
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);
     }

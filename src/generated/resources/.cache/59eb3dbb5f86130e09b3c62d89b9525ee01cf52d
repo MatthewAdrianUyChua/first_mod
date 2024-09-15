@@ -1,4 +1,4 @@
-// 1.20.1	2024-09-08T20:41:16.7190276	Loot Tables
+// 1.20.1	2024-09-15T14:30:17.1795537	Loot Tables
 8f672c105791fe31c2b5b5bd17d363c38ead50d1 data/first_mod/loot_tables/blocks/beer_block.json
 6180a950bdef49bbb83fe937f1f8e5c1e2af08f0 data/first_mod/loot_tables/blocks/beer_pile_block.json
 0c6bb3d7bf0ca6681f58ed3179819d203f8470ac data/first_mod/loot_tables/blocks/beer_set_block.json
@@ -15,6 +15,7 @@ e9a6673f9b10f4915c168e6747de53e815c8d618 data/first_mod/loot_tables/blocks/brand
 3bad121c7aca363a00901d641af41614807679fb data/first_mod/loot_tables/blocks/cigarette_box_block.json
 3eb2a21b47f631101294af9ebdda9397b9e4a849 data/first_mod/loot_tables/blocks/coffee_maker_block.json
 3a7a8155a6ea52fb37e832684cf6948881a0c9fa data/first_mod/loot_tables/blocks/cognac_block.json
+1407131bbe8b3c7f6cf44efa813517c4d6a0010a data/first_mod/loot_tables/blocks/crispy_pork_belly_block.json
 ae924625f59e128a86f821b91e3b3d36003f1c6f data/first_mod/loot_tables/blocks/cupcake_block.json
 636750b8c47cdab09360d38f41cb98700ff2dafb data/first_mod/loot_tables/blocks/cutting_board_block.json
 fa48d102dda86a06b9242fe44ba20a5d95c73f8f data/first_mod/loot_tables/blocks/donut_block.json

@@ -1,6 +1,8 @@
-// 1.20.1	2024-09-05T23:12:59.56611	Item Models: first_mod
+// 1.20.1	2024-09-14T13:29:43.5911301	Item Models: first_mod
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/first_mod/models/item/cat_spawn_egg.json
 e6d9dd85a092518c7560296cdb4d012b0bf835df assets/first_mod/models/item/chef_armor.json
+a0354cff230eb055bbf47701e8b14aff6ffe40d8 assets/first_mod/models/item/dough.json
+f0b473da5ba63de4e6bedfe3c469f972b893321c assets/first_mod/models/item/kneaded_dough.json
 a1d7ef34d1418b72cb7592e2fe3bfee174918a44 assets/first_mod/models/item/metal_detector.json
 12c24c44ccbbe2332206658669f9b7713f27efb5 assets/first_mod/models/item/raw_sapphire.json
 e9a29c822488393adc7b413d01969ec299b23d92 assets/first_mod/models/item/sapphire.json

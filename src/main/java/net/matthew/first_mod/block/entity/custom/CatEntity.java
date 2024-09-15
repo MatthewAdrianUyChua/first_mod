@@ -5,6 +5,7 @@ import net.matthew.first_mod.block.custom.Cat_Bowl_Block;
 import net.matthew.first_mod.block.entity.ModEntities;
 import net.matthew.first_mod.block.entity.goal.*;
 import net.matthew.first_mod.datagen.ModBlockStateProvider;
+import net.matthew.first_mod.item.ModItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -77,13 +78,17 @@ public class CatEntity extends TamableAnimal implements GeoEntity {
 
     private static final EntityDataAccessor<Boolean> focus = SynchedEntityData.defineId(CatEntity.class, EntityDataSerializers.BOOLEAN);
 
-    private long sittingTime = System.currentTimeMillis();
+    private static final EntityDataAccessor<Boolean> isKneading = SynchedEntityData.defineId(CatEntity.class, EntityDataSerializers.BOOLEAN);
+
+    private static final EntityDataAccessor<Long> sittingTime = SynchedEntityData.defineId(CatEntity.class, EntityDataSerializers.LONG);
 
     private long eatingTime = System.currentTimeMillis();
 
     private long scratchingTime = System.currentTimeMillis();
 
     private long lastMovedTime = System.currentTimeMillis();
+
+    private long kneadingTime = System.currentTimeMillis();
 
     public BlockPos targetPos;
 
@@ -104,15 +109,16 @@ public class CatEntity extends TamableAnimal implements GeoEntity {
     protected void registerGoals() {
 
         this.goalSelector.addGoal(1, new FloatGoal(this));
-        this.goalSelector.addGoal(2, new WalkToFoodGoal(this, 0.8F, ModBlocks.CAT_BOWL.get(), this));
-        this.goalSelector.addGoal(3, new SitWhenOrderedToGoal(this));
+        this.goalSelector.addGoal(2, new SitWhenOrderedToGoal(this));
+        this.goalSelector.addGoal(3, new WalkToFoodGoal(this, 0.8F, ModBlocks.CAT_BOWL.get(), this));
         this.goalSelector.addGoal(4, new CustomFollowOwnerGoal(this, 0.5F, 10.0F, 5.0F, false, this));
         this.goalSelector.addGoal(5, new LeapAtTargetGoal(this, 0.3F));
-        this.goalSelector.addGoal(6, new WalkToBlockGoal(this, 0.5F, Blocks.RED_BED, this));
-        this.goalSelector.addGoal(7, new WalkToBlockSharpenGoal(this, 0.5F, Blocks.OAK_LOG, this));
-        this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 0.5f));
-        this.goalSelector.addGoal(9, new CustomRandomLookAroundGoal(this, this));
-        this.goalSelector.addGoal(10, new CustomLookAtPlayerGoal(this, Player.class, 10.0F, this));
+        this.goalSelector.addGoal(6, new OcelotAttackGoal(this));
+        this.goalSelector.addGoal(7, new WalkToBlockGoal(this, 0.5F, Blocks.RED_BED, this));
+        this.goalSelector.addGoal(8, new WalkToBlockSharpenGoal(this, 0.5F, Blocks.OAK_LOG, this));
+        this.goalSelector.addGoal(9, new WaterAvoidingRandomStrollGoal(this, 0.5f));
+        this.goalSelector.addGoal(10, new CustomRandomLookAroundGoal(this, this));
+        this.goalSelector.addGoal(11, new CustomLookAtPlayerGoal(this, Player.class, 10.0F, this));
 
         this.targetSelector.addGoal(1, new NonTameRandomTargetGoal<>(this, Rabbit.class, false, (Predicate<LivingEntity>)null));
         this.targetSelector.addGoal(1, new NonTameRandomTargetGoal<>(this, Turtle.class, false, Turtle.BABY_ON_LAND_SELECTOR));
@@ -150,19 +156,31 @@ public class CatEntity extends TamableAnimal implements GeoEntity {
             //System.out.println(isSleeping);
             //System.out.println("BLOCK SHARPEN TARGET" + (this.blockPosition().closerThan(targetPosSharpen, 1.5) && (blockTargetSharpen.equals(Blocks.OAK_LOG) == true)));
             //System.out.println("BLOCK TARGET" + (this.blockPosition().closerThan(targetPos, 1.5) && (blockTarget.equals(ModBlocks.CAT_BOWL.get()) == true)));
+
+            if(this.isSitting() == true){
+                if(this.isSleeping() == true){
+                    tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.cat.sleep", Animation.LoopType.LOOP));
+                }else if(this.isKneading() == true){
+                    tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.cat.knead", Animation.LoopType.PLAY_ONCE));
+                    return PlayState.CONTINUE;
+                }else{
+                    tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.cat.sit", Animation.LoopType.LOOP));
+                }
+                return PlayState.CONTINUE;
+            }
+
+            if(this.isKneading() == true){
+                tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.cat.knead", Animation.LoopType.PLAY_ONCE));
+                return PlayState.CONTINUE;
+            }
+
+
             if (!tAnimationState.isMoving()) {
                 //System.out.println(isSitting);
 
                 if((System.currentTimeMillis() - lastMovedTime >= 2500 && this.isSitting() == false)){
                     //System.out.println("PLAY LAYING DOWN");
                     tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.cat.layingDown", Animation.LoopType.PLAY_ONCE).then("animation.cat.layingDownLoop", Animation.LoopType.LOOP));
-                    return PlayState.CONTINUE;
-                }else if(this.isSitting() == true){
-                    if(this.isSleeping() == true){
-                        tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.cat.sleep", Animation.LoopType.LOOP));
-                    }else{
-                        tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.cat.sit", Animation.LoopType.LOOP));
-                    }
                     return PlayState.CONTINUE;
                 }
 
@@ -275,10 +293,13 @@ public class CatEntity extends TamableAnimal implements GeoEntity {
                 }
 
                 if(this.isSitting() == false){
+                    this.setSleeping(false);
                     this.setNoAi(false);
+                    this.setSittingTime(System.currentTimeMillis());
                 }else{
-                    if(System.currentTimeMillis() - sittingTime >= 17250){
+                    if(System.currentTimeMillis() - sittingTime() >= 17250){
                         this.setNoAi(true);
+                        this.setSleeping(true);
                     }
                 }
 
@@ -292,18 +313,22 @@ public class CatEntity extends TamableAnimal implements GeoEntity {
                     }
                 }
 
+                if(this.isKneading() == true){
+                    this.setNoAi(true);
+                    //this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.0F);
+                    this.setSittingTime(System.currentTimeMillis());
+                    if(System.currentTimeMillis() - kneadingTime >= 8500){
+                        this.spawnAtLocation(ModItems.KNEADED_DOUGH.get());
+                        this.setKneading(false);
+                    }
+                }else{
+                    this.setNoAi(false);
+                    //this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.5F);
+                    kneadingTime = System.currentTimeMillis();
+                }
+
             }
         }else{
-
-            if(this.isSitting() == false){
-                sittingTime = System.currentTimeMillis();
-                this.setSleeping(false);
-            }else{
-                if(System.currentTimeMillis() - sittingTime >= 17250){
-                    //System.out.println("SLEEP");
-                    this.setSleeping(true);
-                }
-            }
 
             if(targetPos != null) {
                 if (this.blockPosition().closerThan(targetPos,  1.0)) {
@@ -399,6 +424,26 @@ public class CatEntity extends TamableAnimal implements GeoEntity {
         this.entityData.set(lastSharpenTime, time);
     }
 
+    public boolean isKneading() {
+        return this.entityData.get(isKneading);
+    }
+
+    // Setter for isSitting
+    public void setKneading(boolean kneading) {
+        this.entityData.set(isKneading, kneading);
+    }
+
+    public long sittingTime() {
+        return this.entityData.get(sittingTime);
+    }
+
+    // Setter for isSitting
+    public void setSittingTime(long time) {
+        this.entityData.set(sittingTime, time);
+    }
+
+
+
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
@@ -412,6 +457,8 @@ public class CatEntity extends TamableAnimal implements GeoEntity {
         this.entityData.define(targetPosFood, BlockPos.ZERO);
         this.entityData.define(targetPosSharpen, BlockPos.ZERO);
         this.entityData.define(lastSharpenTime, System.currentTimeMillis());
+        this.entityData.define(isKneading, false);
+        this.entityData.define(sittingTime, System.currentTimeMillis());
     }
 
     @Override
@@ -440,7 +487,17 @@ public class CatEntity extends TamableAnimal implements GeoEntity {
 
                         return InteractionResult.SUCCESS;
                     }
-                } else{
+                }else if (itemstack.getItem() ==  ModItems.DOUGH.get() && this.isTame()) {
+                    if (!this.level().isClientSide) {
+                        // Reduce the item count
+                        itemstack.shrink(1);
+
+                        this.setKneading(true);
+
+                        return InteractionResult.SUCCESS;
+
+                    }
+                }else{
                     switch (interactSetting()){
                         case 1: //makes the entity follow
                             System.out.println("CASE 1" + interactSetting);

@@ -18,6 +18,8 @@ public class CatRenderer extends GeoEntityRenderer<CatEntity> {
     public ResourceLocation getTextureLocation(CatEntity animatable) {
         if(animatable.isSleeping() == true){
             return new ResourceLocation(first_mod.MODID, "textures/entities/cat_eyes_closed.png");
+        }else if(animatable.isKneading() == true){
+            return new ResourceLocation(first_mod.MODID, "textures/entities/cat_knead.png");
         }else{
             return new ResourceLocation(first_mod.MODID, "textures/entities/cat.png");
         }

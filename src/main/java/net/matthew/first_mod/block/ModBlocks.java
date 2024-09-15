@@ -211,6 +211,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> CAT_BOWL = registerBlock("cat_bowl",
             () -> new Cat_Bowl_Block(BlockBehaviour.Properties.copy(Blocks.GLASS).sound(SoundType.WOOD).noOcclusion()));
 
+    public static final RegistryObject<Block> CRISPY_PORK_BELLY_BLOCK = registerBlock("crispy_pork_belly_block",
+            () -> new Four_Cake_Like_Rotatable_Block(BlockBehaviour.Properties.copy(Blocks.GLASS).sound(SoundType.WOOD).noOcclusion()));
+
     public static final RegistryObject<Block> SAPPHIRE_ORE = registerBlock("sapphire_ore",
             () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.STONE)
                     .strength(2f).requiresCorrectToolForDrops(), UniformInt.of(3,6))); //this means you will get 3-6 exp per mine of ore

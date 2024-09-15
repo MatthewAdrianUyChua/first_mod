@@ -1,4 +1,4 @@
-// 1.20.1	2024-09-08T20:41:16.7170325	Block States: first_mod
+// 1.20.1	2024-09-15T14:30:17.1785592	Block States: first_mod
 a2122eb1eb62af726af6514ef7bac296c8bd3a87 assets/first_mod/blockstates/beer_block.json
 d49a92be51c98ae9a595ffe1ffeebd8134f1dd46 assets/first_mod/blockstates/beer_pile_block.json
 56046101deba37af25c480515c312b1ba9ea55ad assets/first_mod/blockstates/beer_set_block.json
@@ -15,6 +15,7 @@ f4c691bfcb77639c826fd760c2292cb93d292515 assets/first_mod/blockstates/candy_bloc
 05894f810f146ad80bb00f64bd4207531165d411 assets/first_mod/blockstates/cigarette_box_block.json
 ef5d1232b46beed019ef3766d01e5afa7bd06ea8 assets/first_mod/blockstates/coffee_maker_block.json
 8adf26f942c3467b2e05d86e217761d690131e53 assets/first_mod/blockstates/cognac_block.json
+280f9a0e2285d17afcdf801d93ee3ffaa35b145b assets/first_mod/blockstates/crispy_pork_belly_block.json
 660118281589e2df57a3b63aa490553acafd0e22 assets/first_mod/blockstates/cupcake_block.json
 3619e940c5a5b9f65e4cfa847b1c8d648aa54bb5 assets/first_mod/blockstates/cutting_board_block.json
 6064d2d7808d61b642f43901adf8416c8d4dece9 assets/first_mod/blockstates/donut_block.json

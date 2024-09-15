@@ -102,6 +102,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         directionalBlockWithItem(ModBlocks.EGG_STEAK_SANDWICH_BLOCK, ResourceLocation.tryParse("first_mod:block/egg_steak_sandwich_block"));
         directionalBlockWithItem(ModBlocks.EGG_SANDWICH_BLOCK, ResourceLocation.tryParse("first_mod:block/egg_sandwich_block"));
         catBowlBlock(ModBlocks.CAT_BOWL, ResourceLocation.tryParse("first_mod:block/cat_bowl"));
+        directionalBlockWithFourBites(ModBlocks.CRISPY_PORK_BELLY_BLOCK, ResourceLocation.tryParse("first_mod:block/crispy_pork_belly_block"));
         //blockWithItem(ModBlocks.CUTTING_BOARD_BLOCK);
     }
 

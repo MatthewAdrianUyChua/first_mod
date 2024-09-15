@@ -70,6 +70,9 @@
   "item.first_mod.cat_spawn_egg": "Cat Spawn Egg",
   "block.first_mod.cat_bowl": "Cat Bowl",
   "block.first_mod.cat_bowl_with_salmon": "Cat Bowl With Salmon",
+  "item.first_mod.dough": "Dough",
+  "item.first_mod.kneaded_dough": "Kneaded Dough",
+  "block.first_mod.crispy_pork_belly_block": "Crispy Pork Belly Block",
 
   "creative.mod_tab": "Mod Tab"
 }

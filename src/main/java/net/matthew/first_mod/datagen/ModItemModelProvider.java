@@ -32,8 +32,12 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.RAW_SAPPHIRE);
         simpleItem(ModItems.METAL_DETECTOR);
         simpleItem(ModItems.STRAWBERRY);
-        writeJsonFileItem("..\\src\\main\\resources\\assets\\first_mod\\models\\item\\" + ModItems.SKEWER_ITEM.getId().getPath() + ".json", "first_mod:block/" + ModBlocks.SKEWER.getId().getPath());
+        simpleItem(ModItems.DOUGH);
         simpleItem(ModItems.CHEF_HAT);
+        simpleItem(ModItems.KNEADED_DOUGH);
+
+
+        writeJsonFileItem("..\\src\\main\\resources\\assets\\first_mod\\models\\item\\" + ModItems.SKEWER_ITEM.getId().getPath() + ".json", "first_mod:block/" + ModBlocks.SKEWER.getId().getPath());
         writeJsonFileItem("..\\src\\main\\resources\\assets\\first_mod\\models\\item\\" + ModItems.EGG_STEAK_SANDWICH.getId().getPath() + ".json", "first_mod:block/" + ModBlocks.EGG_STEAK_SANDWICH_BLOCK.getId().getPath());
         writeJsonFileItem("..\\src\\main\\resources\\assets\\first_mod\\models\\item\\" + ModItems.EGG_SANDWICH.getId().getPath() + ".json", "first_mod:block/" + ModBlocks.EGG_SANDWICH_BLOCK.getId().getPath());
 

@@ -87,6 +87,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.EGG_STEAK_SANDWICH_BLOCK.get());
         this.dropSelf(ModBlocks.EGG_SANDWICH_BLOCK.get());
         this.dropSelf(ModBlocks.CAT_BOWL.get());
+        this.dropSelf(ModBlocks.CRISPY_PORK_BELLY_BLOCK.get());
 
 
         this.add(ModBlocks.SAPPHIRE_ORE.get(),

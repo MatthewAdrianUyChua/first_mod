@@ -88,6 +88,9 @@ public class ModCreativeModeTabs {
                         pOutput.accept(ModItems.EGG_SANDWICH.get());
                         pOutput.accept(ModItems.CAT_SPAWN_EGG.get());
                         pOutput.accept(ModBlocks.CAT_BOWL.get());
+                        pOutput.accept(ModItems.DOUGH.get());
+                        pOutput.accept(ModItems.KNEADED_DOUGH.get());
+                        pOutput.accept(ModBlocks.CRISPY_PORK_BELLY_BLOCK.get());
                     })).build());
 
     public static void register(IEventBus eventBus){
